@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:clickable="false"
+        android:shadowColor="#B0000000"
+        android:shadowDx="5.0"
+        android:shadowDy="5.0"
+        android:shadowRadius="5.0"
+        android:text="About"
+        android:textColor="#A1CAF1"
+        android:textSize="28dip" />
+
+      <ImageView
+           android:layout_marginTop="15dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/logo_adatronics_256" />
+      
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dip"
+        android:textSize="14dip"
+        android:text="@string/About" />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_marginTop="15dip"
+        android:layout_marginBottom="15dip"
+        android:layout_height="wrap_content"
+        android:textColor="#bb6008"
+        android:textSize="20dip"
+        android:text="@string/Email" />
+    
+
+</LinearLayout>
