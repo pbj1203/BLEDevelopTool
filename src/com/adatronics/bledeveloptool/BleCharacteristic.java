@@ -210,13 +210,6 @@ public class BleCharacteristic extends ListActivity {
 			return;
 		}
 		mBluetoothGatt.close();
-		mBluetoothGatt = null;
-		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	@Override

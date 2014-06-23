@@ -26,5 +26,25 @@
         android:layout_marginLeft="6dip"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
+    <TextView
+        android:id="@+id/text_004"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dip"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/text_005"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dip"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/text_006"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dip"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </LinearLayout>

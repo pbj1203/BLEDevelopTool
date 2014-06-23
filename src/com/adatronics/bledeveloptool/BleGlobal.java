@@ -15,7 +15,13 @@ public class BleGlobal {
 	private static HashMap<String, String> Servermap = new HashMap();
 	public static ArrayList<String> deviceName = new ArrayList<String>();
 	public static ArrayList<String> deviceAddress = new ArrayList<String>();
+	public static ArrayList<String> deviceRSSI = new ArrayList<String>();
+	
 	public static Map<String, BluetoothDevice> mDevices = new HashMap<String, BluetoothDevice>();
+	public static Map<String, String> mRSSI = new HashMap<String, String>();
+	public static Map<String, String> mScanRecord = new HashMap<String, String>();
+	public static Map<String, String> mMajor = new HashMap<String, String>();
+	public static Map<String, String> mMinor = new HashMap<String, String>();
 	static {
         // Sample Services.
 		Servermap.put("00001800-0000-1000-8000-00805f9b34fb", "Generic Access Profile");
