@@ -1,9 +1,13 @@
-package com.adatronics.bledeveloptool;
+package com.adatronics.bledeveloptool.ble;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.adatronics.bledeveloptool.R;
+import com.adatronics.bledeveloptool.R.id;
+import com.adatronics.bledeveloptool.R.layout;
 
 import android.app.ListActivity;
 import android.bluetooth.BluetoothDevice;

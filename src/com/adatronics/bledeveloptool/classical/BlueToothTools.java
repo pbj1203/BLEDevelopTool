@@ -1,10 +1,14 @@
-package com.adatronics.bledeveloptool;
+package com.adatronics.bledeveloptool.classical;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.adatronics.bledeveloptool.R;
+import com.adatronics.bledeveloptool.RefreshableView;
+import com.adatronics.bledeveloptool.R.id;
+import com.adatronics.bledeveloptool.R.layout;
 import com.adatronics.bledeveloptool.RefreshableView.PullToRefreshListener;
 import android.app.Activity;
 import android.app.ListActivity;

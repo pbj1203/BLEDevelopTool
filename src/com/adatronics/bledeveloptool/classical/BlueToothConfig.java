@@ -1,4 +1,9 @@
-package com.adatronics.bledeveloptool;
+package com.adatronics.bledeveloptool.classical;
+
+import com.adatronics.bledeveloptool.R;
+import com.adatronics.bledeveloptool.R.id;
+import com.adatronics.bledeveloptool.R.layout;
+import com.adatronics.bledeveloptool.ble.BleGlobal;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;

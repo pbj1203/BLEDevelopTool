@@ -1,4 +1,4 @@
-package com.adatronics.bledeveloptool;
+package com.adatronics.bledeveloptool.classical;
 
 import java.util.ArrayList;
 import java.util.HashMap;

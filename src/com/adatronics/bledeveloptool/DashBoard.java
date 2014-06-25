@@ -1,5 +1,8 @@
 package com.adatronics.bledeveloptool;
 
+import com.adatronics.bledeveloptool.ble.BleScan;
+import com.adatronics.bledeveloptool.classical.BlueToothTools;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;

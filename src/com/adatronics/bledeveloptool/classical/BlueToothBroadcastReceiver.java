@@ -1,4 +1,4 @@
-package com.adatronics.bledeveloptool;
+package com.adatronics.bledeveloptool.classical;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;

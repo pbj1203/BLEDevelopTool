@@ -31,18 +31,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.adatronics.bledeveloptool.BleScan"
+            android:name="com.adatronics.bledeveloptool.ble.BleScan"
             android:configChanges="orientation|keyboardHidden"
             android:label="Ble Scan"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.adatronics.bledeveloptool.BlueToothTools"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.adatronics.bledeveloptool.TestTools"
+            android:name="com.adatronics.bledeveloptool.classical.BlueToothTools"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
@@ -52,17 +47,17 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.adatronics.bledeveloptool.BleService"
+            android:name="com.adatronics.bledeveloptool.ble.BleService"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.adatronics.bledeveloptool.BleCharacteristic"
+            android:name="com.adatronics.bledeveloptool.ble.BleCharacteristic"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.adatronics.bledeveloptool.BleData"
+            android:name="com.adatronics.bledeveloptool.ble.BleData"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>

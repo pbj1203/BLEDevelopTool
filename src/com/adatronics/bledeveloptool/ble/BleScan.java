@@ -1,5 +1,6 @@
-package com.adatronics.bledeveloptool;
+package com.adatronics.bledeveloptool.ble;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -8,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import android.R.integer;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.bluetooth.BluetoothAdapter;
@@ -29,6 +31,10 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.adatronics.bledeveloptool.R;
+import com.adatronics.bledeveloptool.RefreshableView;
+import com.adatronics.bledeveloptool.R.id;
+import com.adatronics.bledeveloptool.R.layout;
 import com.adatronics.bledeveloptool.RefreshableView.PullToRefreshListener;
 
 /**
@@ -41,7 +47,6 @@ public class BleScan extends ListActivity {
 	RefreshableView refreshableView;
 	private boolean mScanning;
 	private Handler mHandler;
-	private ArrayAdapter<String> adapter;
 	private static final int REQUEST_ENABLE_BT = 3;
 	TextView scan_resutls;
 	private String DEVICE_NAME = "NAME";
@@ -53,7 +58,9 @@ public class BleScan extends ListActivity {
 
 	// private AsyncTask<String, Integer, Boolean> scanTask;
 	// private boolean isScanning = false;
+	private List<Map<String, String>> gattDevicelist = new ArrayList<Map<String, String>>();
 
+	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -81,8 +88,6 @@ public class BleScan extends ListActivity {
 			startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
 		}
 		refreshableView = (RefreshableView) findViewById(R.id.refreshable_view);
-		adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, BleGlobal.deviceName);
 		displayTextView();
 		refreshableView.setOnRefreshListener(new PullToRefreshListener() {
 			@Override
@@ -91,7 +96,6 @@ public class BleScan extends ListActivity {
 					@Override
 					public void run() {
 						BleGlobal.deviceName.clear();
-						adapter.notifyDataSetChanged();
 						// scan_resutls.setText("Scanning for devices...");
 					}
 				});
@@ -119,7 +123,6 @@ public class BleScan extends ListActivity {
 		// scan_resutls.setText("Scanning for devices...");
 		BleGlobal.deviceName.clear();
 		BleGlobal.mDevices.clear();
-		adapter.notifyDataSetChanged();
 		scan();
 	}
 
@@ -128,14 +131,12 @@ public class BleScan extends ListActivity {
 		super.onPause();
 	}
 
+	@SuppressLint("NewApi")
 	private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
 		@Override
 		public void onLeScan(final BluetoothDevice device, int rssi,
 				byte[] scanRecord) {
 			if (!BleGlobal.mDevices.containsKey(device.getAddress())) {
-
-				
-				final int mrssi = rssi;
 				String uuid = IntToHex2(scanRecord[9] & 0xff)
 						+ IntToHex2(scanRecord[10] & 0xff)
 						+ IntToHex2(scanRecord[11] & 0xff)
@@ -164,10 +165,12 @@ public class BleScan extends ListActivity {
 				BleGlobal.mMajor.put(device.getAddress(), major);
 				BleGlobal.mMinor.put(device.getAddress(), minor);
 				BleGlobal.mDevices.put(device.getAddress(), device);
+				BleGlobal.mRSSI.put(device.getAddress(), String.valueOf(rssi));
+//				updateListAdpater();
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						updateListAdpater(mrssi);
+						updateListAdpater();
 					}
 				});
 			}
@@ -190,19 +193,15 @@ public class BleScan extends ListActivity {
 		});
 	}
 
-	private void updateListAdpater(int rssi) {
-		List<Map<String, String>> gattDevicelist = new ArrayList<Map<String, String>>();
-		Set<String> keySet = BleGlobal.mDevices.keySet();
-		Iterator it = keySet.iterator();
-		BleGlobal.deviceName.clear();
-		BleGlobal.deviceAddress.clear();
-		while (it.hasNext()) {
-			String key = (String) it.next();
+	private void updateListAdpater() {
+		gattDevicelist.clear();
+		for(int i=0; i<BleGlobal.mDevices.size(); i++) {
+			String key = BleGlobal.mDevices.keySet().toArray()[i].toString();
 			Map<String, String> currentData = new HashMap<String, String>();
 			BluetoothDevice device = BleGlobal.mDevices.get(key);
 			BleGlobal.deviceAddress.add(key);
 			currentData.put(DEVICE_ADDRESS, "MAC Address: " + key);
-			currentData.put(DEVICE_RSSI, "RSSI: " + String.valueOf(rssi));
+			currentData.put(DEVICE_RSSI, "RSSI: " + BleGlobal.mRSSI.get(key));
 			currentData.put(EXTRA_NAME,
 					"UUID: " + BleGlobal.mScanRecord.get(key));
 			currentData.put(MAJOR, "major: " + BleGlobal.mMajor.get(key));
@@ -224,10 +223,11 @@ public class BleScan extends ListActivity {
 						R.id.text_005, R.id.text_006 }));
 	}
 
+	@SuppressLint("NewApi")
 	private void scan() {
 		try {
 			mBluetoothAdapter.startLeScan(mLeScanCallback);
-			Thread.sleep(1500);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -235,30 +235,6 @@ public class BleScan extends ListActivity {
 		displayTextView();
 	}
 
-	// private void scan() {
-	// if (isScanning)
-	// return;
-	// refreshableView.disablePull();
-	// scanTask = new AsyncTask<String, Integer, Boolean>() {
-	// protected Boolean doInBackground(String... something) {
-	// try {
-	// mBluetoothAdapter.startLeScan(mLeScanCallback);
-	// Thread.sleep(5000);
-	// } catch (Exception e1) {
-	// e1.printStackTrace();
-	// }
-	// mBluetoothAdapter.stopLeScan(mLeScanCallback);
-	// return true;
-	// }
-	//
-	// protected void onPostExecute(Boolean result) {
-	// isScanning = false;
-	// displayTextView();
-	// refreshableView.enablePull();
-	// }
-	// };
-	// scanTask.execute();
-	// }
 	private String IntToHex2(int i) {
 		char hex_2[] = { Character.forDigit((i >> 4) & 0x0f, 16),
 				Character.forDigit(i & 0x0f, 16) };

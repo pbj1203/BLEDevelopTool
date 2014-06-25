@@ -1,6 +1,10 @@
-package com.adatronics.bledeveloptool;
+package com.adatronics.bledeveloptool.ble;
 
 import java.util.UUID;
+
+import com.adatronics.bledeveloptool.R;
+import com.adatronics.bledeveloptool.R.id;
+import com.adatronics.bledeveloptool.R.layout;
 
 import android.R.string;
 import android.app.Activity;
