@@ -227,7 +227,7 @@ public class BleScan extends ListActivity {
 	private void scan() {
 		try {
 			mBluetoothAdapter.startLeScan(mLeScanCallback);
-			Thread.sleep(1000);
+			Thread.sleep(1500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
